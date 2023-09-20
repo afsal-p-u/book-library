@@ -1,12 +1,12 @@
 import Books from '@/components/Books'
 import React from 'react'
 
-const Wishlist = () => {
+const Cart = () => {
   return (
-    <div className='pl-[30px] pe-[100px]'>
+    <div>
       <Books />
     </div>
   )
 }
 
-export default Wishlist
+export default Cart

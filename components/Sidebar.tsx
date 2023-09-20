@@ -21,7 +21,7 @@ const Sidebar = () => {
       className={`w-full h-screen py-5 px-[10px] bg-white dark:bg-light-black ps-[100px]`}
     >
       {/* name and theme control */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-10">
         <h1 className="text-2xl font-bold text-black dark:text-white">
           <span className="text-blue">Book</span>Elysium
         </h1>
@@ -43,7 +43,7 @@ const Sidebar = () => {
 
       {/* searchbox */}
       <div
-        className="mt-4 px-5 py-2 flex items-center rounded-[5px] shadow-sm border-[1px] 
+        className="mt-5 px-5 py-2 flex items-center rounded-[5px] shadow-sm border-[1px] 
           border-shadow-light/50"
       >
         <input
@@ -56,26 +56,26 @@ const Sidebar = () => {
 
       {/* categories */}
       <div className="mt-5">
-        <h6 className="font-medium text-black text-lg dark:text-white">
+        <h6 className="font-semibold text-black text-lg dark:text-white">
           Popular Topics
         </h6>
         <div className="mt-2 flex flex-col gap-1">
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Children&apos;s books
           </p>
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Business & Money
           </p>
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Self help
           </p>
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Computer & Technology
           </p>
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Archetecture
           </p>
-          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
+          <p className="text-light-black text-sm cursor-pointer dark:text-medium-light font-medium">
             Programming
           </p>
         </div>

@@ -21,7 +21,7 @@ const Books = () => {
           </h2>
 
           <div>
-            <h6 className="text-black-light text-sm dark:text-medium-light">
+            <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
               Robert T Kiyosaki
             </h6>
             <p className="text-light-white text-xs">Business & Money</p>
@@ -63,7 +63,7 @@ const Books = () => {
           </h2>
 
           <div>
-            <h6 className="text-black-light text-sm dark:text-medium-light">
+            <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
               James Clear
             </h6>
             <p className="text-light-white text-xs">Self help</p>
@@ -105,7 +105,7 @@ const Books = () => {
           </h2>
 
           <div>
-            <h6 className="text-black-light text-sm dark:text-medium-light">
+            <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
               Joe Wicks
             </h6>
             <p className="text-light-white text-xs">Nutrition</p>

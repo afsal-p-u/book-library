@@ -4,11 +4,11 @@ import React from "react";
 const Dashboard = () => {
   return (
     <div className="pl-[30px] pe-[100px]">
-      <ul className="flex gap-5">
-        <li className="text-black dark:text-white font-medium text-xl cursor-pointer">
+      <ul className="flex gap-5 mt-5">
+        <li className="text-black dark:text-white font-semibold text-xl cursor-pointer">
           For You
         </li>
-        <li className="text-light-black dark:text-light-white font-normal text-xl cursor-pointer">
+        <li className="text-light-black/90 dark:text-light-white font-medium text-xl cursor-pointer">
           New Release
         </li>
       </ul>

@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <ThemeProvider>
-          <div className={`flex w-full`}>
+          <div className={`flex w-full dark:bg-light-black`}>
             <div className="w-1/4">
               <Sidebar />
             </div>
