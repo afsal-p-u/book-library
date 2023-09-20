@@ -1,25 +1,10 @@
 "use client"
 
-import { useState, createContext, useContext } from 'react'
+import { ThemeProvider as TP } from "next-themes"
 
-const ThemeContext = createContext({
-    theme: 'light',
-    setTheme: (value: string) => {}
-})
-
-export const ThemeContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [theme, _setTheme] = useState(JSON.parse(localStorage?.getItem('theme')!) || 'light')
-
-    const setTheme = (value: string) => {
-        localStorage?.setItem('theme', JSON.stringify(value))
-        _setTheme(value)
-    }
-
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     return (
-        <ThemeContext.Provider
-            value={{ theme, setTheme }}
-        >{children}</ThemeContext.Provider>
+        <TP attribute="class">{children}</TP>
     )
 }
 
-export const useThemeContext = () => useContext(ThemeContext)

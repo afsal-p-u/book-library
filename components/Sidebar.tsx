@@ -1,13 +1,24 @@
-import { useThemeContext } from "@/app/provider";
-import React from "react";
+"use client";
+
+import { useTheme } from 'next-themes'
+import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 
 const Sidebar = () => {
-  const { setTheme } = useThemeContext();
+  const [mounted, setMounted] = useState(false)
+  const { setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div
-      className={`w-full h-screen py-5 px-[10px] bg-white dark:bg-light-black`}
+      className={`w-full h-screen py-5 px-[10px] bg-white dark:bg-light-black ps-[100px]`}
     >
       {/* name and theme control */}
       <div className="flex justify-between items-center">
@@ -17,7 +28,7 @@ const Sidebar = () => {
 
         <div
           className="w-[40px] h-[20px] rounded-full border-[1px] 
-          border-shadow-dark/50 flex dark:border-shadow-light/50"
+            border-shadow-dark/50 flex dark:border-shadow-light/50"
         >
           <div
             className={`w-[20px] h-full bg-black rounded-full cursor-pointer dark:bg-light-black`}
@@ -33,7 +44,7 @@ const Sidebar = () => {
       {/* searchbox */}
       <div
         className="mt-4 px-5 py-2 flex items-center rounded-[5px] shadow-sm border-[1px] 
-        border-shadow-light/50"
+          border-shadow-light/50"
       >
         <input
           type="search"
@@ -50,7 +61,7 @@ const Sidebar = () => {
         </h6>
         <div className="mt-2 flex flex-col gap-1">
           <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
-            Children's books
+            Children&apos;s books
           </p>
           <p className="text-light-black text-sm cursor-pointer dark:text-medium-light">
             Business & Money
