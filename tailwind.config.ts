@@ -17,7 +17,8 @@ const config: Config = {
       "medium-light": "#D0D0D0",
       "shadow-dark": "#999999",
       "shadow-light": "#7B7B7B", 
-      green: "#07FF2F"
+      green: "#07FF2F",
+      red: "#FF1414",
     },
     extend: {
       boxShadow: {

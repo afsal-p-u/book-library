@@ -1,9 +1,6 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
-import { ThemeProvider } from "./provider";
+import { ThemeProvider } from "../provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <ThemeProvider>
-          <div className={`flex w-full dark:bg-light-black`}>
-            <div className="w-1/4">
-              <Sidebar />
-            </div>
-            <div className="w-3/4">
-              <Navbar />
-              {children}
-            </div>
-          </div>
+          <div>{children}</div>
         </ThemeProvider>
       </body>
     </html>
