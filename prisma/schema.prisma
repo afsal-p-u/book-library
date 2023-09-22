@@ -17,9 +17,8 @@ model User {
   email String @unique
   password String
   wishlist Books[]
-  // cart Books[] @relation("cart")
-  // wishlist Books[] @relation("wishlist")
-  // purchased Books[] @relation("purchased")
+  cart Cart[]
+  collection Collection[]
 }
 
 model Books {
@@ -33,11 +32,31 @@ model Books {
 
   wishlist User? @relation(fields: [wishlistId], references: [id])
   wishlistId Int?
+}
 
-  // wishlist User @relation("wishlist", fields: [wishlistId], references: [id])
-  // wishlistId Int
-  // cart User @relation("cart", fields: [cartId], references: [id])
-  // cartId Int
-  // purchased User @relation("purchased", fields: [purchasedId], references: [id])
-  // purchasedId Int
+model Collection {
+  id Int @id @default(autoincrement())
+  title String
+  image String
+  author String
+  category String
+  price Int
+  star Int
+  downloadUrl String?
+
+  collection User? @relation(fields: [collectionId], references: [id])
+  collectionId Int?
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+  title String
+  image String
+  author String
+  category String
+  price Int
+  star Int
+
+  cart User? @relation(fields: [cartId], references: [id])
+  cartId Int?
 }

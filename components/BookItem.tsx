@@ -45,7 +45,11 @@ const BookItem = ({ type }: BookItemProps) => {
               <button className="px-3 py-1 rounded bg-red text-white font-medium text-xs">
                 Remove
               </button>
-            ) : ''}
+            ) : (
+              <button className="px-3 py-1 rounded bg-blue text-white font-medium text-xs">
+                Add to cart
+              </button>
+            )}
             {type === "wishlist" ? (
               <FcLike size={20} className="cursor-pointer" />
             ) : type === "bookstore" ? (
