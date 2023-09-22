@@ -1,5 +1,3 @@
-"use client"
-
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Signup from '@/pages/Signup'
 import { getServerSession } from 'next-auth'

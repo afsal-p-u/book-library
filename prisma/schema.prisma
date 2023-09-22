@@ -59,4 +59,4 @@ model Cart {
 
   cart User? @relation(fields: [cartId], references: [id])
   cartId Int?
-}
+} 

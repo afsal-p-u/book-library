@@ -19,8 +19,6 @@ export const authOptions: AuthOptions = {
       async authorize(credentials: CredentialsType) {
         const { email, password } = credentials;
 
-        console.log(email, password)
-
         try {
           await connectDB();
 
