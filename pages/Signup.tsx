@@ -25,13 +25,13 @@ const Signup = () => {
           <Inputs
             type="email"
             placeholder="Email"
-            name="name"
+            name="email"
             onchange={handleChange}
           />
           <Inputs
             type="password"
             placeholder="Password"
-            name="name"
+            name="password"
             onchange={handleChange}
           />
 
