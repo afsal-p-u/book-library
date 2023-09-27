@@ -1,3 +1,6 @@
+"use client"
+
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -5,13 +8,49 @@ import { FcLike } from "react-icons/fc";
 
 interface BookItemProps {
   type?: string;
+  item?: any
 }
 
-const BookItem = ({ type }: BookItemProps) => {
+const BookItem = ({ type, item }: BookItemProps) => {
+  const { data: session } = useSession()
+
+  const addToCart = async () => {
+    const res = await fetch(`api/cart`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...item, email: session?.user?.email })
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+    } else {
+      console.log("Error")
+    }
+  }
+
+  const handleWishlist = async () => {
+    const res = await fetch('/api/wishlist', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ...item, email: session?.user?.email })
+    })
+
+    const data = await res.json()
+    if (res.ok) {
+      console.log("Success", data)
+    } else {
+      console.log("Error", data)
+    }
+  }
+
   return (
     <div className="w-[412px] h-[225px] rounded flex book-shadow shadow-sm">
       <Image
-        src="/richdadpoordad.webp"
+        src={item?.image}
         alt="richdadpoordad"
         width={154}
         className="border-t rounded"
@@ -21,18 +60,18 @@ const BookItem = ({ type }: BookItemProps) => {
 
       <div className="flex flex-col gap-2 px-[15px] py-[15px] justify-between">
         <h2 className="text-lg text-black font-semibold dark:text-white">
-          Rich Dad Poor Dad
+          {item?.title}
         </h2>
 
         <div>
           <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
-            Robert T Kiyosaki
+            {item?.author}
           </h6>
-          <p className="text-light-white text-xs">Business & Money</p>
+          <p className="text-light-white text-xs">{item?.category}</p>
         </div>
 
         {type !== 'collection' && (
-            <h1 className="text-xl text-green font-semibold">$5</h1>
+            <h1 className="text-xl text-green font-semibold">${item?.price}</h1>
         )}
 
         <div className="flex flex-col gap-3">
@@ -46,14 +85,17 @@ const BookItem = ({ type }: BookItemProps) => {
                 Remove
               </button>
             ) : (
-              <button className="px-3 py-1 rounded bg-blue text-white font-medium text-xs">
+              <button 
+                className="px-3 py-1 rounded bg-blue text-white font-medium text-xs"
+                onClick={addToCart}
+              >
                 Add to cart
               </button>
             )}
             {type === "wishlist" ? (
               <FcLike size={20} className="cursor-pointer" />
             ) : type === "bookstore" ? (
-              <AiOutlineHeart size={20} className="cursor-pointer" />
+              <AiOutlineHeart size={20} className="cursor-pointer" onClick={handleWishlist} />
             ) : ''}
           </div>
           <div className="flex gap-1">

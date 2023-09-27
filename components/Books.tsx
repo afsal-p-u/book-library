@@ -1,96 +1,20 @@
 import React from "react";
-import Image from "next/image";
 import BookItem from "./BookItem";
-import { AiOutlineHeart } from "react-icons/ai";
 
-const Books = () => {
+const Books = async () => {
+    const res = await fetch(`${process.env.SERVER_URL}/book`, { method: "GET" })
+    if (!res.ok) {
+      console.log("Error")
+      throw new Error("Error occured")
+    }
+
+    const items = await res.json()
+
   return (
     <div className="mt-5 flex gap-5 flex-wrap w-full justify-between">
-      <BookItem type="bookstore" />
-
-      <div className="w-[412px] h-[225px] rounded flex book-shadow shadow-sm">
-        <Image
-          src="/atomichabits.webp"
-          alt="atomichabits"
-          width={154}
-          className="border-t rounded"
-          objectFit="contain"
-          height={225}
-        />
-
-        <div className="flex flex-col gap-2 px-[15px] py-[15px] justify-between">
-          <h2 className="text-lg text-black font-semibold dark:text-white">
-            Atomic Habits
-          </h2>
-
-          <div>
-            <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
-              James Clear
-            </h6>
-            <p className="text-light-white text-xs">Self help</p>
-          </div>
-
-          <h1 className="text-xl text-green font-semibold">$5</h1>
-
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <button className="px-3 py-1 rounded bg-blue text-white font-medium text-xs">
-                Add to cart
-              </button>
-              <AiOutlineHeart size={20} className="cursor-pointer" />
-            </div>
-            <div className="flex gap-1">
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-[412px] h-[225px] rounded flex book-shadow shadow-sm">
-        <Image
-          src="/leanin15.webp"
-          alt="leanin15"
-          width={154}
-          className="border-t rounded"
-          objectFit="contain"
-          height={225}
-        />
-
-        <div className="flex flex-col gap-2 px-[15px] py-[15px] justify-between">
-          <h2 className="text-lg text-black font-semibold dark:text-white">
-            Lean in 15 - The Shift Plan
-          </h2>
-
-          <div>
-            <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
-              Joe Wicks
-            </h6>
-            <p className="text-light-white text-xs">Nutrition</p>
-          </div>
-
-          <h1 className="text-xl text-green font-semibold">$3</h1>
-
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <button className="px-3 py-1 rounded bg-blue text-white font-medium text-xs">
-                Add to cart
-              </button>
-              <AiOutlineHeart size={20} className="cursor-pointer" />
-            </div>
-            <div className="flex gap-1">
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-              <Image src="./star.svg" alt="star" width={12} height={12} />
-            </div>
-          </div>
-        </div>
-      </div>
+      {items?.books?.map((item: any, i: number) => (
+        <BookItem type="bookstore" key={i} item={item} />
+      ))}
     </div>
   );
 };

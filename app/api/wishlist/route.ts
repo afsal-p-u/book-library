@@ -3,15 +3,25 @@ import { connectDB } from "@/utils/connectDB";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
-  const { title, image, category, price, star, author, email } =
-    await req.json();
+  const { title, image, category, price, star, author, email } = await req.json()
 
   try {
     await connectDB();
     const user = await prisma.user.findUnique({ where: { email } });
-    await prisma.cart.create({
+
+    const existingBook = await prisma.wishlist.findFirst({
+      where: {
+        wishlistId: user?.id,
+        title
+      }
+    })
+    if (existingBook) {
+      return NextResponse.json({ message: "Book alredy in your wishlist" }, { status: 401 })
+    }
+
+    await prisma.wishlist.create({
       data: {
-        cartId: user?.id,
+        wishlistId: user?.id,
         title,
         image,
         category,
@@ -27,4 +37,3 @@ export const POST = async (req: Request) => {
     return NextResponse.json(err, { status: 500 });
   }
 };
-

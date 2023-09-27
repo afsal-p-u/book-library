@@ -1,12 +1,46 @@
 "use client"
 
 import Inputs from "@/components/Inputs";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+
+type SignUpTypes = {
+  name: string,
+  email: string, 
+  password: string
+}
 
 const Signup = () => {
-  const handleChange = async () => {
+  const [inputs, setInputs] = useState<SignUpTypes | null>(null)
+  const router = useRouter()
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs((prev: SignUpTypes | any) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
   };
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const res = await fetch('/api/signup', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(inputs)
+    })
+
+    const data = await res.json()
+    if (res.ok) {
+      console.log(data)
+      router.push('/login')
+    } else {
+      console.log(data)
+      console.log("Error")
+    }
+  }
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-light-black">
@@ -15,7 +49,7 @@ const Signup = () => {
           SIGNUP
         </h1>
 
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <Inputs
             type="text"
             placeholder="Username"

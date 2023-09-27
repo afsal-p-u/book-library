@@ -7,7 +7,7 @@ export const POST = async (req: Request) => {
 
     try {
         await connectDB()
-        await prisma.books.create({ data: { title, author, image, category, price, star, wishlist: {} }})
+        await prisma.books.create({ data: { title, author, image, category, price, star }})
          
         return NextResponse.json({ message: "success" }, { status: 200 })
     } catch (err) {
@@ -21,7 +21,7 @@ export const GET = async () => {
         await connectDB()
         const books = await prisma.books.findMany()
          
-        return NextResponse.json(books, { status: 200 })
+        return NextResponse.json({ books }, { status: 200 })
     } catch (err) {
         console.log(err)
         return Response.json({ message: err }, { status: 500 })

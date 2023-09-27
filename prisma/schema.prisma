@@ -16,12 +16,22 @@ model User {
   name String
   email String @unique
   password String
-  wishlist Books[]
+  wishlist Wishlist[]
   cart Cart[]
   collection Collection[]
 }
 
 model Books {
+  id Int @id @default(autoincrement())
+  title String
+  image String
+  author String
+  category String
+  price Int
+  star Int
+}
+
+model Wishlist {
   id Int @id @default(autoincrement())
   title String
   image String
