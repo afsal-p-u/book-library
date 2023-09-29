@@ -15,3 +15,19 @@ export const GET = async (req: Request, { params }: { params: { email: string }}
     return NextResponse.json(err, { status: 500 });
   }
 };
+
+export const DELETE = async (
+  req: Request,
+  { params }: { params: { email: string } }
+) => {
+  const { email } = params;
+
+  try {
+    await connectDB()
+    await prisma.wishlist.delete({ where: { id: parseInt(email) }})
+
+    return NextResponse.json({ message: "Removed from cart" }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: err }, { status: 500 })
+  }
+};

@@ -3,20 +3,19 @@ import { connectDB } from "@/utils/connectDB";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
-  const { title, image, category, price, star, author, email } = await req.json();
+  const { bookId, email } = await req.json();
 
   try {
     await connectDB();
     const user = await prisma.user.findUnique({ where: { email } });
+    const book = await prisma.books.findUnique({ where: { id: bookId }})
+    const { id, ...others }: any = book
+
+
     await prisma.cart.create({
       data: {
-        cartId: user?.id,
-        title,
-        image,
-        category,
-        price,
-        star,
-        author,
+        cartId: user?.id!,
+        ...others
       },
     });
 

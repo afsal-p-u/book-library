@@ -8,11 +8,12 @@ import { FcLike } from "react-icons/fc";
 
 interface BookItemProps {
   type?: string;
-  item?: any
+  item?: any;
+  changes?: any
 }
 
-const BookItem = ({ type, item }: BookItemProps) => {
-  const { data: session } = useSession()
+const BookItem = ({ type, item, changes }: BookItemProps) => {
+  const { data: session } = useSession() || ''
 
   const addToCart = async () => {
     const res = await fetch(`api/cart`, {
@@ -20,13 +21,30 @@ const BookItem = ({ type, item }: BookItemProps) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ ...item, email: session?.user?.email })
+      body: JSON.stringify({ bookId: item.id, email: session?.user?.email })
     })
 
     if (res.ok) {
       const data = await res.json()
+      console.log('Success')
     } else {
       console.log("Error")
+    }
+  }
+
+  const handleRemoveFromCart = async () => {
+    const res = await fetch(`/api/cart/${item.id}`, { 
+      method: "DELETE", headers: { 'Content-Type': 'application/json' 
+    } })
+
+    const data = await res.json()
+    if (!res.ok) {
+      console.log("Error")
+      console.log(data)
+    } else {
+      console.log('Success')
+      changes((prev: any) => !prev)
+      console.log(data)
     }
   }
 
@@ -44,6 +62,21 @@ const BookItem = ({ type, item }: BookItemProps) => {
       console.log("Success", data)
     } else {
       console.log("Error", data)
+    }
+  }
+
+  const handleRemoveWishlist = async () => {
+    const res = await fetch(`/api/wishlist/${item.id}`, { 
+      method: "DELETE", headers: { 'Content-Type': 'application/json' } })
+
+    const data = await res.json()
+    if (!res.ok) {
+      console.log("Error")
+      console.log(data)
+    } else {
+      console.log('Success')
+      changes((prev: any) => !prev)
+      console.log(data)
     }
   }
 
@@ -81,7 +114,10 @@ const BookItem = ({ type, item }: BookItemProps) => {
                 Download
               </button>
             ) : type === "cart" ? (
-              <button className="px-3 py-1 rounded bg-red text-white font-medium text-xs">
+              <button 
+                className="px-3 py-1 rounded bg-red text-white font-medium text-xs"
+                onClick={handleRemoveFromCart}
+              >
                 Remove
               </button>
             ) : (
@@ -93,7 +129,7 @@ const BookItem = ({ type, item }: BookItemProps) => {
               </button>
             )}
             {type === "wishlist" ? (
-              <FcLike size={20} className="cursor-pointer" />
+              <FcLike size={20} className="cursor-pointer" onClick={handleRemoveWishlist} />
             ) : type === "bookstore" ? (
               <AiOutlineHeart size={20} className="cursor-pointer" onClick={handleWishlist} />
             ) : ''}

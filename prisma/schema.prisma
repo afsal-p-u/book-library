@@ -29,6 +29,7 @@ model Books {
   category String
   price Int
   star Int
+  downloadUrl String
 }
 
 model Wishlist {
@@ -52,7 +53,7 @@ model Collection {
   category String
   price Int
   star Int
-  downloadUrl String?
+  downloadUrl String
 
   collection User? @relation(fields: [collectionId], references: [id])
   collectionId Int?
@@ -66,6 +67,7 @@ model Cart {
   category String
   price Int
   star Int
+  downloadUrl String
 
   cart User? @relation(fields: [cartId], references: [id])
   cartId Int?
