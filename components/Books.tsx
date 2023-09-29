@@ -7,7 +7,7 @@ const Books = () => {
   const [items, setItems] = useState<any [] | null>(null)
 
   const getBooks = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/book`, { method: "GET" })
+    const res = await fetch(`api/book`, { method: "GET" })
 
     const data = await res.json()
 
