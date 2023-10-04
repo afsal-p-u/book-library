@@ -10,15 +10,14 @@ const Sidebar = () => {
   const { setTheme } = useTheme();
   const { search, setSearch } = useSearchContext();
 
-  console.log(search);
-
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  // if (!mounted) {
+  //   console.log('hai')
+  //   return null;
+  // }
 
   return (
     <>
