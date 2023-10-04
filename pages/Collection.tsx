@@ -1,36 +1,53 @@
 "use client"
 
+import { useSearchContext } from '@/app/provider'
 import BookItem from '@/components/BookItem'
+import { BooksType } from '@/utils/types'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 
 const Collection = () => {
-  const [items, setItems] = useState<any [] | null>(null)
+  const [items, setItems] = useState<BooksType [] | null>(null)
   const { data: session } = useSession() || ''
+  const { search } = useSearchContext()
 
   const getCollections = async () => {
     const res = await fetch(`/api/collection/${session?.user?.email}`, {
       method: "GET"
     })
 
+    
     const data = await res.json()
+    console.log(data)
     if (res.ok) {
       setItems(data.data)
-    } else {
+    } else { 
       console.log("Error", data.message)
     }
   }
 
   useEffect(() => {
     getCollections()
-  }, [])
+  }, [session])
 
   return (
-    <div className='pl-[30px] pe-[100px]'>
-      <div className="mt-5 flex gap-5 flex-wrap w-full justify-between">
-        {items?.map((item, i) => (
-        <BookItem type='collection' item={item} key={i} />
-        ))}
+    <div className='pl-[30px] pe-[100px] max-xl:pe-[60px] max-lg:pe-[40px] max-md:pl-[0px] max-md:mt-[70px] max-md:min-h-[100vh]'>
+      <div className="mt-5 flex gap-5 flex-wrap w-full max-lg:justify-center">
+        {search ? (
+          <>
+            {items?.filter((item) => item?.title?.toLowerCase()?.includes(search?.toLowerCase()))?.map((items, i) => { 
+              return (
+              <BookItem type="collection" key={i} item={items} />
+            )
+            })}
+          </>
+        ) : (
+          <>
+            {items?.map((item, i) => (
+              <BookItem type='collection' item={item} key={i} />
+            ))}
+          </>   
+        )}
       </div>
     </div>
   )

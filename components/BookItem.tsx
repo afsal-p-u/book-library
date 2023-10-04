@@ -1,5 +1,7 @@
 "use client"
 
+import { useMessageContext } from "@/app/provider";
+import { BooksType } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
@@ -8,12 +10,13 @@ import { FcLike } from "react-icons/fc";
 
 interface BookItemProps {
   type?: string;
-  item?: any;
-  changes?: any
+  item?: BooksType;
+  changes?: () => void
 }
 
 const BookItem = ({ type, item, changes }: BookItemProps) => {
   const { data: session } = useSession() || ''
+  const { setMessage, setType } = useMessageContext()
 
   const addToCart = async () => {
     const res = await fetch(`api/cart`, {
@@ -21,19 +24,21 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ bookId: item.id, email: session?.user?.email })
+      body: JSON.stringify({ bookId: item?.id, email: session?.user?.email })
     })
+    const data = await res.json()
 
     if (res.ok) {
-      const data = await res.json()
-      console.log('Success')
+      setMessage('Successfully added to the cart')
+      setType('success')
     } else {
-      console.log("Error")
+      setMessage(data.message)
+      setType('error')
     }
   }
 
   const handleRemoveFromCart = async () => {
-    const res = await fetch(`/api/cart/${item.id}`, { 
+    const res = await fetch(`/api/cart/${item?.id}`, { 
       method: "DELETE", headers: { 'Content-Type': 'application/json' 
     } })
 
@@ -43,7 +48,7 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
       console.log(data)
     } else {
       console.log('Success')
-      changes((prev: any) => !prev)
+      changes && changes()
       console.log(data)
     }
   }
@@ -66,7 +71,7 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
   }
 
   const handleRemoveWishlist = async () => {
-    const res = await fetch(`/api/wishlist/${item.id}`, { 
+    const res = await fetch(`/api/wishlist/${item?.id}`, { 
       method: "DELETE", headers: { 'Content-Type': 'application/json' } })
 
     const data = await res.json()
@@ -75,15 +80,18 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
       console.log(data)
     } else {
       console.log('Success')
-      changes((prev: any) => !prev)
+      changes && changes()
       console.log(data)
     }
   }
 
   return (
-    <div className="w-[412px] h-[225px] rounded flex book-shadow shadow-sm">
+    <div 
+      className="w-[412px] h-[225px] rounded flex book-shadow shadow-sm
+      max-xl:w-[320px] max-xl:h-[190px] max-lg:w-[380px] max-lg:h-[200px] max-md:bg-blue"
+    >
       <Image
-        src={item?.image}
+        src={item?.image || ''}
         alt="richdadpoordad"
         width={154}
         className="border-t rounded"
@@ -92,19 +100,19 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
       />
 
       <div className="flex flex-col gap-2 px-[15px] py-[15px] justify-between">
-        <h2 className="text-lg text-black font-semibold dark:text-white">
+        <h2 className="text-lg text-black font-semibold dark:text-white max-xl:text-sm">
           {item?.title}
         </h2>
 
         <div>
-          <h6 className="text-black-light font-medium text-sm dark:text-medium-light">
+          <h6 className="text-black-light font-medium text-sm dark:text-medium-light max-xl:text-xs max-lg:text-sm">
             {item?.author}
           </h6>
           <p className="text-light-white text-xs">{item?.category}</p>
         </div>
 
         {type !== 'collection' && (
-            <h1 className="text-xl text-green font-semibold">${item?.price}</h1>
+            <h1 className="text-xl text-green font-semibold max-xl:text-lg max-lg:text-xl">${item?.price}</h1>
         )}
 
         <div className="flex flex-col gap-3">

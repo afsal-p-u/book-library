@@ -18,11 +18,9 @@ export const GET = async (
       where: { email },
       include: { cart: true },
     });
-
-    const { downloadUrl, ...others }: any = user?.cart
     
-    const filtered = user?.cart.map((item) => {
-      const { downloadUrl, ...others } = item
+    const filtered = user?.cart?.map((item) => {
+      const { downloadUrl, ...others } = item!
       return others
     })
 

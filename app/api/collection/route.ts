@@ -27,3 +27,12 @@ export const POST = async (req: Request) => {
   }
 };
 
+// export const DELETE = async () => {
+//   try {
+//     await connectDB()
+//     await prisma.user.delete({ where: { cart }})
+
+//   } catch (err) {
+//     return NextResponse.json({ message: err }, { status: 200 })
+//   }
+// }
