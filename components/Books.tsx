@@ -7,7 +7,7 @@ import { useSearchContext } from "@/providers/SearchProvider";
 import { useMessageContext } from "@/providers/MessageProvider";
 
 const Books = () => {
-  const [items, setItems] = useState<BooksType[]>([]);
+  const [items, setItems] = useState<BooksType[] | null>(null);
   const { search } = useSearchContext();
   const { setMessage, setType } = useMessageContext();
 
