@@ -20,31 +20,24 @@ export const POST = async (req: Request) => {
 };
 
 export const GET = async () => {
-  await connectDB();
+  try {
+    await connectDB();
+    const books = await prisma.books.findMany({
+      select: {
+        id: true,
+        title: true,
+        image: true,
+        author: true,
+        category: true,
+        price: true,
+        star: true,
+        downloadUrl: false,
+      },
+    });
 
-  const books = await prisma.books.findMany({
-    select: {
-      id: true,
-      title: true,
-      image: true,
-      author: true,
-      category: true,
-      price: true,
-      star: true,
-      downloadUrl: false,
-    },
-  });
-  
-  if (!books) {
-    return NextResponse.json({ message: "Books does not exist" }, { status: 400 });
+    return NextResponse.json({ books }, { status: 200 });
+  } catch (err) {
+    console.log(err);
+    return Response.json({ message: err }, { status: 500 });
   }
-
-  return NextResponse.json({ books }, { status: 200 });
-
-  // try {
-
-  // } catch (err) {
-  //   console.log(err);
-  //   return Response.json({ message: err }, { status: 500 });
-  // }
 };

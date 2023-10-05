@@ -42,7 +42,7 @@ const Signup = () => {
     }
   }
 
-  return (
+  return ( 
     <div className="w-full h-screen flex items-center justify-center bg-white dark:bg-light-black">
       <div className="w-[480px] shadow border-[1px] border-[#27272721] dark:border-[#cecece11] px-[40px] py-[40px]">
         <h1 className="text-blue font-semibold text-center text-2xl mb-8">
