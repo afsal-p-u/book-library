@@ -7,25 +7,26 @@ import { useSearchContext } from "@/providers/SearchProvider";
 import { useMessageContext } from "@/providers/MessageProvider";
 
 const Books = () => {
-  const [items, setItems] = useState<BooksType[]>()
+  const [items, setItems] = useState<BooksType[]>([])
   const { search } = useSearchContext()
   const { setMessage, setType } = useMessageContext()
 
-  const getBooks = async () => {
-    const res = await fetch(`api/book`, { method: "GET" })
-    const data = await res.json()
-
-    if (res.ok) {
-      setItems(data.books)
-    } else {
-      setMessage(data.message)
-      setType('error')
-    }
-  }
-
+  
   useEffect(() => {
+    const getBooks = async () => {
+      const res = await fetch(`api/book`, { method: "GET" })
+      const data = await res.json()
+  
+      if (res.ok) {
+        setItems(data.books)
+      } else {
+        setMessage(data.message)
+        setType('error')
+      }
+    }
+
     getBooks()
-  }, [getBooks])
+  }, [])
 
   return (
     <div className="mt-5 flex gap-5 flex-wrap w-full">
