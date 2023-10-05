@@ -1,7 +1,7 @@
 "use client"
 
+import { useMessageContext } from '@/providers/MessageProvider'
 import React, { useEffect, useState } from 'react'
-import { useMessageContext } from '../app/provider'
 
 const Message = () => {
   const { message, type } = useMessageContext()

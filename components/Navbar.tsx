@@ -12,7 +12,7 @@ import { BsBookmarkStar, BsCollection } from 'react-icons/bs'
 const Navbar = () => {
   const [showSignout, setShowSignout] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session } = useSession() || '';
 
   return (
     <>

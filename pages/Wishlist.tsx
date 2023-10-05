@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchContext } from "@/app/provider";
 import BookItem from "@/components/BookItem";
+import { useSearchContext } from "@/providers/SearchProvider";
 import { BooksType } from "@/utils/types";
 import React, { useState } from "react";
 import { useEffect } from "react";

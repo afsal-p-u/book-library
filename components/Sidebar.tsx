@@ -1,18 +1,20 @@
 "use client";
 
-import { useSearchContext } from "@/app/provider";
+import { useSearchContext } from "@/providers/SearchProvider";
+import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 
 const Sidebar = () => {
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const { setTheme } = useTheme();
-  const { search, setSearch } = useSearchContext();
+  const { setSearch } = useSearchContext();
+  // const { data } = useSession()
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
 
   // if (!mounted) {
   //   console.log('hai')

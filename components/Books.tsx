@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import BookItem from "./BookItem";
 import { BooksType } from "@/utils/types";
-import { useMessageContext, useSearchContext } from "@/app/provider";
+import { useSearchContext } from "@/providers/SearchProvider";
+import { useMessageContext } from "@/providers/MessageProvider";
 
 const Books = () => {
   const [items, setItems] = useState<BooksType[]>()

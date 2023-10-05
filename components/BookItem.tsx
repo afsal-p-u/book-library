@@ -1,6 +1,6 @@
 "use client"
 
-import { useMessageContext } from "@/app/provider";
+import { useMessageContext } from "@/providers/MessageProvider";
 import { BooksType } from "@/utils/types";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -95,7 +95,6 @@ const BookItem = ({ type, item, changes }: BookItemProps) => {
         alt="richdadpoordad"
         width={154}
         className="border-t rounded"
-        objectFit="contain"
         height={225}
       />
 
