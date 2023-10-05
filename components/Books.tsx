@@ -11,7 +11,6 @@ const Books = () => {
   const { search } = useSearchContext();
   const { setMessage, setType } = useMessageContext();
 
-  
   useEffect(() => {
     const getBooks = async () => {
       const res = await fetch(`api/book`, {
@@ -29,7 +28,7 @@ const Books = () => {
         setType("error");
       }
     };
-    
+
     getBooks();
   }, []);
 
