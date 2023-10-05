@@ -23,9 +23,9 @@ const Books = () => {
     }
   }
 
-  useEffect(() => {
-    getBooks()
-  }, [getBooks])
+  // useEffect(() => {
+  //   getBooks()
+  // }, [getBooks])
 
   return (
     <div className="mt-5 flex gap-5 flex-wrap w-full">

@@ -30,10 +30,10 @@ const Wishlist = () => {
       console.log("Error");
     }
   };
-  console.log(items);
-  useEffect(() => {
-    getWishlistItems();
-  }, [changes]);
+
+  // useEffect(() => {
+  //   getWishlistItems();
+  // }, [changes]);
 
   return (
     <div className="pl-[30px] pe-[100px] max-md:mt-[70px] max-md:min-h-[100vh]">

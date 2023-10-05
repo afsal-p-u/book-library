@@ -1,7 +1,7 @@
 "use client";
 
 import BookItem from "@/components/BookItem";
-import PaymentOrder from "@/components/PaymentOrder";
+// import PaymentOrder from "@/components/PaymentOrder";
 import { useSearchContext } from "@/providers/SearchProvider";
 import { BooksType } from "@/utils/types";
 import { useSession } from "next-auth/react";
@@ -30,9 +30,9 @@ const Cart = () => {
     }
   };
 
-  useEffect(() => {
-    getItems();
-  }, [changes, getItems]);
+  // useEffect(() => {
+  //   getItems();
+  // }, [changes, getItems]);
 
   return (
     <div className="pl-[30px] pe-[100px] max-md:mt-[70px] max-md:min-h-[100vh]">
@@ -62,7 +62,7 @@ const Cart = () => {
           )}
         </div>
 
-        <PaymentOrder cartItems={items} />
+        {/* <PaymentOrder cartItems={items} /> */}
       </div>
     </div>
   );
