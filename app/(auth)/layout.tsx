@@ -20,13 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`}>
-        <SessionProvider>
           <ThemeProvider>
             <MessageContextProvider>
               {children}
             </MessageContextProvider>
           </ThemeProvider>
-        </SessionProvider>
       </body>
     </html>
   );

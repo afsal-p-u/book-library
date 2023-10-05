@@ -15,7 +15,7 @@ const Message = () => {
     setTimeout(() => {
       visible && setVisible(false)
     }, 10000)
-  }, [message])
+  }, [message, visible])
 
   return (
     <>

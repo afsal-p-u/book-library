@@ -28,7 +28,7 @@ const Collection = () => {
 
   useEffect(() => {
     getCollections()
-  }, [session])
+  }, [getCollections])
 
   return (
     <div className='pl-[30px] pe-[100px] max-xl:pe-[60px] max-lg:pe-[40px] max-md:pl-[0px] max-md:mt-[70px] max-md:min-h-[100vh]'>

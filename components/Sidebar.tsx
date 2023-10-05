@@ -10,7 +10,7 @@ const Sidebar = () => {
   // const [mounted, setMounted] = useState(false);
   const { setTheme } = useTheme();
   const { setSearch } = useSearchContext();
-  // const { data } = useSession()
+  const { data } = useSession()
 
   // useEffect(() => {
   //   setMounted(true);

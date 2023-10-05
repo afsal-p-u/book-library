@@ -32,7 +32,7 @@ const Cart = () => {
 
   useEffect(() => {
     getItems();
-  }, [changes, session]);
+  }, [changes, getItems]);
 
   return (
     <div className="pl-[30px] pe-[100px] max-md:mt-[70px] max-md:min-h-[100vh]">
