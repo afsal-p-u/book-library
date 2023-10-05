@@ -8,4 +8,5 @@ export const connectDB = async () => {
     console.log(err)
     return false
   })
+  return true
 };
